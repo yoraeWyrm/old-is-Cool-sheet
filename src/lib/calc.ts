@@ -1,6 +1,6 @@
 // Cálculos da ficha: CA, ataque, peso e movimento. Funções puras, sem interface.
 
-import type { OseSheet, Location, Weapon } from './model'
+import type { OseSheet, Location, Weapon, GearItem } from './model'
 import {
   BASIC_MOVEMENT, COIN_WEIGHT, DETAILED_MOVEMENT, ITEM_BASED_MOVEMENT,
   AC_BASE, DESCENDING_AC_CONSTANT, ENCOUNTER_DIVISOR, OVERLAND_DIVISOR,
@@ -102,6 +102,12 @@ export function weaponDamage(w: Weapon): string {
 export function coinsWeight(s: OseSheet): number {
   const c = s.coins
   return round((pn(c.pp) + pn(c.gp) + pn(c.ep) + pn(c.sp) + pn(c.cp)) * COIN_WEIGHT)
+}
+
+// Peso de uma linha de equipamento: quantidade x peso de cada unidade. Vazio quando é zero.
+export function gearLineText(g: GearItem): string {
+  const v = round(pn(g.qty) * pn(g.weight))
+  return v ? fmt(v) : ''
 }
 
 export function totalWeight(s: OseSheet): number {

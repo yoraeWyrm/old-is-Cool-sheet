@@ -18,17 +18,11 @@
     let tab = 'char'
     let viewing = 'me'
 
-
     // Jogadores que já publicaram uma ficha (só o narrador usa esta lista).
     $: others = $players.filter((p) => p.metadata && p.metadata[NS])
     $: other = viewing === 'me' ? null : others.find((p) => p.id === viewing)
     $: viewed = other ? (normalizeSheet(other.metadata[NS]) as OseSheet) : null
-
-    // Volta à ficha própria caso o jogador selecionado não esteja mais disponível.
-    $: if (viewing !== 'me' && !others.some((p) => p.id === viewing)) {
-        viewing = 'me'
-    }
-
+    $: if (viewing !== 'me' && !other) viewing = 'me'
 
     function optionLabel(p: { name: string; metadata: Record<string, unknown> }): string {
         return p.name + ' (' + normalizeSheet(p.metadata[NS]).name + ')'

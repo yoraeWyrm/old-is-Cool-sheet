@@ -25,19 +25,14 @@
 <Weapons bind:data {ro} />
 
 <section class="box">
-    <h2>Atributos de classe e raça</h2>
-    <textarea aria-label="Atributos de classe e raça" bind:value={data.classRace} readonly={ro}></textarea>
+    <h2>Particularidades Inatas</h2>
+    <textarea aria-label="Particularidades Inatas" bind:value={data.classRace} readonly={ro}></textarea>
 </section>
 
 <Skills bind:data {ro} />
 <Gear bind:data {ro} />
 <Armor bind:data {ro} />
 <Coins bind:data {ro} />
-
-<section class="box">
-    <h2>Antecedentes</h2>
-    <textarea aria-label="Antecedentes" bind:value={data.background} readonly={ro}></textarea>
-</section>
 
 <section class="box">
     <h2>Anotações</h2>

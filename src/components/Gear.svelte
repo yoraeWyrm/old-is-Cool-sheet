@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { OseSheet } from '../lib/model'
     import { newGear } from '../lib/model'
+    import { gearLineText } from '../lib/calc'
 
     export let data: OseSheet
     export let ro = false
@@ -25,7 +26,7 @@
                 <th class="n w-s">Qtd</th>
                 <th>Nome</th>
                 <th>Descrição</th>
-                {#if showWeight}<th class="n w-n">Peso</th>{/if}
+                {#if showWeight}<th class="n w-n">Peso</th><th class="n w-n" title="Quantidade x peso">Total</th>{/if}
                 {#if showItems}<th class="w-s">Tam.</th><th class="w-l">Local</th>{/if}
                 {#if !ro}<th class="w-x"></th>{/if}
             </tr>
@@ -38,6 +39,7 @@
                     <td><input type="text" aria-label="Descrição do item" bind:value={g.desc} readonly={ro} /></td>
                     {#if showWeight}
                         <td class="n"><input type="text" aria-label="Peso de cada unidade" bind:value={g.weight} readonly={ro} /></td>
+                        <td class="n"><output>{gearLineText(g)}</output></td>
                     {/if}
                     {#if showItems}
                         <td>
@@ -58,6 +60,6 @@
             {/each}
         </tbody>
     </table>
-    {#if showWeight}<p class="hint">O peso é o de cada unidade. O total multiplica pela quantidade.</p>{/if}
+    {#if showWeight}<p class="hint">O peso é o de cada unidade. O Total da linha é a quantidade vezes o peso, e a soma de tudo aparece em Peso total.</p>{/if}
     {#if !ro}<button class="ghost add" on:click={add}>Adicionar item</button>{/if}
 </section>

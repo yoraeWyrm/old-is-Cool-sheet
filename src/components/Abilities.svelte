@@ -18,15 +18,15 @@
     <h2>Atributos</h2>
     <table class="rows abil">
         <thead>
-            <tr><th></th><th class="n w-s">Valor</th><th class="n w-s">Mod.</th><th>Afeta</th></tr>
+            <tr><th class="w-b"></th><th class="n w-s">Valor</th><th class="n w-s">Mod.</th><th>Afeta</th></tr>
         </thead>
         <tbody>
             {#each list as a (a.k)}
                 <tr>
-                    <th scope="row">{a.ab}</th>
+                    <th scope="row"><span class="badge">{a.ab}</span></th>
                     <td class="n"><input type="text" aria-label="Valor de {a.ab}" bind:value={data.abilities[a.k].score} readonly={ro} /></td>
                     <td class="n"><input type="text" aria-label="Modificador de {a.ab}" bind:value={data.abilities[a.k].mod} readonly={ro} /></td>
-                    <td class="hint">{a.fx}</td>
+                    <td class="hint pad">{a.fx}</td>
                 </tr>
             {/each}
         </tbody>

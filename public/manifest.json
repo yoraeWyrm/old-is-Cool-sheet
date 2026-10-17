@@ -1,14 +1,14 @@
 {
     "name": "Ficha OSE",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "manifest_version": 1,
     "icon": "/icon.svg",
-    "description": "Ficha de personagem para jogos OSR, com peso do equipamento, imagem do personagem e visão do narrador.",
+    "description": "Ficha de personagem para jogos OSR, com peso do equipamento, imagem do personagem e visão do narrador. Possui addons para Dolmenwood (glamour e runas).",
     "action": {
-      "title": "Ficha OSE",
-      "icon": "/icon.svg",
-      "popover": "/",
-      "height": 1200,
-      "width": 700
+        "title": "Ficha OSE",
+        "icon": "/icon.svg",
+        "popover": "/",
+        "height": 1200,
+        "width": 700
     }
 }

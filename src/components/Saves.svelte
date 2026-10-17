@@ -19,12 +19,12 @@
         <tbody>
             {#each list as s (s.k)}
                 <tr>
-                    <td>{s.name}</td>
+                    <td><span class="badge wide">{s.name}</span></td>
                     <td class="n w-s"><input type="text" aria-label="Salvaguarda: {s.name}" bind:value={data.saves[s.k]} readonly={ro} /></td>
                 </tr>
             {/each}
             <tr>
-                <td class="hint">Mod. de SAB contra magia</td>
+                <td><span class="badge wide soft">Mod. de SAB contra magia</span></td>
                 <td class="n"><input type="text" aria-label="Modificador de SAB contra magia" bind:value={data.wisSaveMod} readonly={ro} /></td>
             </tr>
         </tbody>

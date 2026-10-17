@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a4 4 0 0 0-4 4v1h2V7a2 2 0 0 1 4 0v1h2V7a4 4 0 0 0-4-4zM6 9h12l3 12H3L6 9z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">OSR Dolmen</title>
+  <desc id="desc">Three pale megaliths form a dolmen portal around a clearly visible white geometric OSR monogram.</desc>
+  <defs>
+    <style>
+      .stone { fill: #f8fcfd; stroke: #279bc3; stroke-width: 5; stroke-linejoin: bevel; }
+      .letter { fill: #f8fcfd; }
+      .cut { fill: none; stroke: #279bc3; stroke-width: 5; stroke-linecap: square; stroke-linejoin: miter; }
+    </style>
+  </defs>
+  <rect width="256" height="256" rx="18" fill="#279bc3"/>
+  <!-- Three megaliths: two uprights and one horizontal capstone. -->
+  <path class="stone" d="M47 66 L76 54 L205 54 L234 66 L230 91 L51 91 Z"/>
+  <path class="stone" d="M49 82 L82 82 L82 207 L64 218 L49 207 Z"/>
+  <path transform="translate(25 0)" class="stone" d="M174 82 L207 82 L207 207 L192 218 L174 207 Z"/>
+  <!-- White, angular OSR mark; the blue negative spaces define each letter. -->
+  <!-- O -->
+  <path transform="translate(18 0)" class="letter" fill-rule="evenodd" d="M78 99 H108 L119 110 V143 L108 154 H78 L67 143 V110 Z M83 111 L79 115 V138 L83 142 H103 L107 138 V115 L103 111 Z"/>
+  <!-- S -->
+  <path transform="translate(18 0)" class="letter" d="M128 99 H161 L171 109 V119 H158 V112 H135 V120 L142 126 H161 L171 136 V144 L161 154 H127 L117 144 V135 H130 V141 H154 L158 137 L153 132 H134 L122 121 V109 Z"/>
+  <!-- R -->
+  <path transform="translate(18 0)" class="letter" fill-rule="evenodd" d="M67 165 H101 L112 176 V190 L103 199 L115 215 H99 L87 200 H80 V215 H67 Z M80 177 V188 H96 L100 184 V181 L96 177 Z"/>
+  <!-- Small carved notch on the capstone. -->
+  <path class="cut" d="M111 66 L128 77 L145 66"/>
+</svg>

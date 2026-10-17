@@ -23,10 +23,10 @@ body { font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; 
 
 input, select, textarea, button { font: inherit; color: inherit; }
 input[type="text"], input:not([type]), select {
-  width: 100%; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid var(--line);
-  border-radius: 0; padding: 4px 2px;
+  width: 100%; min-width: 0; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 4px; padding: 5px 7px;
 }
-input:focus, select:focus, textarea:focus { outline: none; border-bottom-color: var(--accent); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
 input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 1px;
 }
@@ -77,16 +77,21 @@ button.x:hover { color: var(--danger); }
 .portrait .panel { margin-top: 6px; width: 15rem; position: relative; z-index: 1; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 6px; }
 .portrait .panel button { margin-top: 6px; }
 
-table.rows { width: 100%; border-collapse: collapse; table-layout: fixed; }
-table.rows th { text-align: left; font-weight: 500; font-size: 12px; color: var(--muted); padding: 0 3px 2px; }
-table.rows td { padding: 0 3px; vertical-align: middle; }
-table.rows tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--line) 18%, transparent); }
+table.rows { width: 100%; border-collapse: separate; border-spacing: 0 6px; table-layout: fixed; }
+table.rows th { text-align: left; font-weight: 500; font-size: 12px; color: var(--muted); padding: 0 6px 0; }
+table.rows tbody > tr > * { background: var(--calc-bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 5px 7px; vertical-align: middle; }
+table.rows tbody > tr > *:first-child { border-left: 1px solid var(--line); border-radius: 6px 0 0 6px; }
+table.rows tbody > tr > *:last-child { border-right: 1px solid var(--line); border-radius: 0 6px 6px 0; }
+table.rows tbody th { color: var(--ink); font-size: 13px; }
+table.rows td input, table.rows td select { background: transparent; border-color: transparent; padding: 3px 4px; }
+table.rows td input:hover, table.rows td select:hover { border-color: var(--line); }
+table.rows td input:focus, table.rows td select:focus { border-color: var(--accent); background: var(--panel); }
 table.rows th.n, table.rows td.n { text-align: right; }
 table.rows td.n input { text-align: right; }
 table.rows td.c { text-align: center; }
 table.rows td.hint { font-size: 12px; }
-th.w-n { width: 4.2rem; } th.w-s { width: 3.4rem; } th.w-l { width: 6rem; } th.w-t { width: 5.2rem; } th.w-x { width: 1.6rem; } th.w-c { width: 4.6rem; }
-.abil th[scope="row"] { font-size: 13px; color: var(--ink); width: 2.6rem; }
+table.rows td.pad { padding-left: 14px; }
+.w-n { width: 4.2rem; } .w-s { width: 3.6rem; } .w-l { width: 6rem; } .w-t { width: 5.6rem; } .w-x { width: 1.8rem; } .w-c { width: 4.6rem; } .w-b { width: 5.4rem; }
 .add { margin-top: 8px; }
 
 @media (max-width: 520px) {
@@ -94,5 +99,27 @@ th.w-n { width: 4.2rem; } th.w-s { width: 3.4rem; } th.w-l { width: 6rem; } th.w
   .g4, .g5 { grid-template-columns: repeat(2, 1fr); }
 }
 
-table.rows output { display: block; font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; padding: 4px 2px; }
+table.rows output { display: block; font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; padding: 3px 4px; }
 table.rows td.n output { text-align: right; }
+
+/* Nomes de atributos e salvaguardas dentro de um quadrado */
+.badge { display: inline-block; min-width: 3.4rem; text-align: center; font-weight: 700; letter-spacing: .03em; border: 2px solid var(--accent); border-radius: 6px; padding: 3px 10px; color: var(--ink); background: var(--panel); }
+.badge.wide { display: block; min-width: 0; text-align: left; font-weight: 600; letter-spacing: 0; }
+.badge.soft { border-style: dashed; font-weight: 500; font-size: 12px; }
+
+/* Valores que chamam atenção: CA, ataque total, ajuste de reação e peso total */
+.calc.hl { display: flex; align-items: center; justify-content: center; min-height: 2.8rem; font-size: 1.35rem; font-weight: 700; color: var(--accent); border: 2px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 12%, var(--panel)); text-align: center; }
+
+/* Magias: grupos por nível e um cartão para cada magia */
+.group { margin: 14px 0 6px; padding-top: 10px; border-top: 2px solid var(--line); }
+.group:first-of-type { margin-top: 4px; padding-top: 0; border-top: 0; }
+.group-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.group-head h3 { margin: 0; font-size: 14px; color: var(--accent); }
+.slots { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
+.slots label { display: flex; align-items: center; gap: 6px; }
+.slots input { width: 3.4rem; text-align: center; }
+.card { border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 6px; background: var(--calc-bg); padding: 8px 10px 6px; margin-bottom: 10px; }
+.card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.card-name { flex: 1; font-weight: 600; }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 9px; white-space: nowrap; }
+.card textarea { background: var(--panel); }

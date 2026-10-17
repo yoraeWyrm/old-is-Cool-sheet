@@ -10,7 +10,9 @@ export interface Weapon { id: string; name: string; atk: string; die: string; dm
 export interface GearItem { id: string; qty: string; name: string; desc: string; weight: string; size: string; loc: Location }
 export interface ArmorItem { id: string; name: string; ac: string; weight: string; worn: boolean; type: ArmorType; size: string; loc: Location }
 export interface Skill { id: string; name: string; roll: string; desc: string }
-export interface Spell { id: string; mem: string; name: string; level: string; duration: string; range: string; desc: string }
+// arcane e divine: níveis 1 a 6. glamour: sem nível (uso livre). rune: lesser, greater ou mighty.
+export type SpellType = 'arcane' | 'divine' | 'glamour' | 'rune'
+export interface Spell { id: string; type: SpellType; level: string; mem: string; name: string; duration: string; range: string; desc: string }
 export interface SpellSlot { avail: string; total: string }
 
 export interface OseSheet {
@@ -24,7 +26,6 @@ export interface OseSheet {
   xp: string
   next: string
   image: string
-  background: string
   abilities: { str: Ability; int: Ability; wis: Ability; dex: Ability; con: Ability; cha: Ability }
   saves: { d: string; w: string; p: string; b: string; s: string }
   wisSaveMod: string
@@ -43,7 +44,8 @@ export interface OseSheet {
   coins: { pp: string; gp: string; ep: string; sp: string; cp: string }
   carryingTreasure: boolean
   skills: Skill[]
-  slots: SpellSlot[]
+  arcaneSlots: SpellSlot[]
+  divineSlots: SpellSlot[]
   spells: Spell[]
   charNotes: string
   notes: string
@@ -60,7 +62,7 @@ export const newWeapon = (): Weapon => ({ id: uid(), name: '', atk: '', die: '',
 export const newGear = (): GearItem => ({ id: uid(), qty: '1', name: '', desc: '', weight: '', size: '1', loc: 'packed' })
 export const newArmor = (): ArmorItem => ({ id: uid(), name: '', ac: '', weight: '', worn: false, type: 'unarmored', size: '1', loc: 'equipped' })
 export const newSkill = (name = ''): Skill => ({ id: uid(), name, roll: '', desc: '' })
-export const newSpell = (): Spell => ({ id: uid(), mem: '', name: '', level: '', duration: '', range: '', desc: '' })
+export const newSpell = (type: SpellType = 'arcane', level = '1'): Spell => ({ id: uid(), type, level, mem: '', name: '', duration: '', range: '', desc: '' })
 
 const ability = (): Ability => ({ score: '', mod: '' })
 
@@ -85,7 +87,6 @@ export function defaultSheet(): OseSheet {
     xp: '',
     next: '',
     image: '',
-    background: '',
     abilities: { str: ability(), int: ability(), wis: ability(), dex: ability(), con: ability(), cha: ability() },
     saves: { d: '', w: '', p: '', b: '', s: '' },
     wisSaveMod: '',
@@ -104,8 +105,9 @@ export function defaultSheet(): OseSheet {
     coins: { pp: '', gp: '', ep: '', sp: '', cp: '' },
     carryingTreasure: false,
     skills: DEFAULT_SKILLS.map((n) => newSkill(n)),
-    slots: [1, 2, 3, 4, 5, 6].map(() => ({ avail: '', total: '' })),
-    spells: [newSpell()],
+    arcaneSlots: [1, 2, 3, 4, 5, 6].map(() => ({ avail: '', total: '' })),
+    divineSlots: [1, 2, 3, 4, 5, 6].map(() => ({ avail: '', total: '' })),
+    spells: [],
     charNotes: '',
     notes: '',
     settings: { acType: 'aac', encumbrance: 'detailed' },
@@ -117,6 +119,19 @@ const obj = (v: unknown): Record<string, any> => (v && typeof v === 'object' && 
 const oneOf = <T extends string>(v: unknown, list: readonly T[], f: T): T => (list.includes(v as T) ? (v as T) : f)
 const LOCATIONS = ['equipped', 'packed', 'none'] as const
 const ARMOR_TYPES = ['unarmored', 'light', 'heavy'] as const
+
+const SPELL_TYPES = ['arcane', 'divine', 'glamour', 'rune'] as const
+const NUMBER_LEVELS = ['1', '2', '3', '4', '5', '6'] as const
+const RUNE_LEVELS = ['lesser', 'greater', 'mighty'] as const
+
+function spellRow(r: Record<string, any>): Spell {
+  // Magias de fichas antigas não tinham tipo e valem como arcanas.
+  const type = oneOf(r.type, SPELL_TYPES, 'arcane')
+  let level = ''
+  if (type === 'arcane' || type === 'divine') level = oneOf(str(r.level), NUMBER_LEVELS, '1')
+  if (type === 'rune') level = oneOf(str(r.level), RUNE_LEVELS, 'lesser')
+  return { id: uid(), type, level, mem: str(r.mem), name: str(r.name), duration: str(r.duration), range: str(r.range), desc: str(r.desc) }
+}
 
 // Aceita qualquer objeto (arquivo importado, dados de outro jogador) e devolve uma ficha válida.
 export function normalizeSheet(d: unknown): OseSheet {
@@ -138,7 +153,12 @@ export function normalizeSheet(d: unknown): OseSheet {
   const saves = obj(s.saves)
   const coins = obj(s.coins)
   const settings = obj(s.settings)
-  const slotsIn = Array.isArray(s.slots) ? s.slots : []
+  const slotList = (v: unknown): SpellSlot[] => {
+    const arr = Array.isArray(v) ? v : []
+    return base.arcaneSlots.map((_, i) => ({ avail: str(obj(arr[i]).avail), total: str(obj(arr[i]).total) }))
+  }
+  // Fichas antigas tinham uma lista única de espaços de magia, que passa a valer para as arcanas.
+  const arcaneIn = s.arcaneSlots !== undefined ? s.arcaneSlots : s.slots
 
   return {
     v: 1,
@@ -151,7 +171,6 @@ export function normalizeSheet(d: unknown): OseSheet {
     xp: str(s.xp),
     next: str(s.next),
     image: /^https?:\/\/\S+$/i.test(str(s.image).trim()) ? str(s.image).trim() : '',
-    background: str(s.background),
     abilities: { str: abil('str'), int: abil('int'), wis: abil('wis'), dex: abil('dex'), con: abil('con'), cha: abil('cha') },
     saves: { d: str(saves.d), w: str(saves.w), p: str(saves.p), b: str(saves.b), s: str(saves.s) },
     wisSaveMod: str(s.wisSaveMod),
@@ -179,10 +198,9 @@ export function normalizeSheet(d: unknown): OseSheet {
     coins: { pp: str(coins.pp), gp: str(coins.gp), ep: str(coins.ep), sp: str(coins.sp), cp: str(coins.cp) },
     carryingTreasure: s.carryingTreasure === true,
     skills: rows(s.skills, (r) => ({ id: uid(), name: str(r.name), roll: str(r.roll), desc: str(r.desc) }), () => [newSkill()]),
-    slots: base.slots.map((_, i) => ({ avail: str(obj(slotsIn[i]).avail), total: str(obj(slotsIn[i]).total) })),
-    spells: rows(s.spells, (r) => ({
-      id: uid(), mem: str(r.mem), name: str(r.name), level: str(r.level), duration: str(r.duration), range: str(r.range), desc: str(r.desc),
-    }), () => [newSpell()]),
+    arcaneSlots: slotList(arcaneIn),
+    divineSlots: slotList(s.divineSlots),
+    spells: rows(s.spells, spellRow, () => []),
     charNotes: str(s.charNotes),
     notes: str(s.notes),
     settings: {
@@ -202,6 +220,6 @@ export function compactSheet(sh: OseSheet): unknown {
     gear: strip(sh.gear, (r) => !r.name && !r.desc && !r.weight),
     armor: strip(sh.armor, (r) => !r.name && !r.ac && !r.weight),
     skills: strip(sh.skills, (r) => !r.name && !r.roll && !r.desc),
-    spells: strip(sh.spells, (r) => !r.name && !r.desc && !r.mem),
+    spells: strip(sh.spells, (r) => !r.name && !r.desc && !r.mem && !r.duration && !r.range),
   }
 }

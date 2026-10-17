@@ -14,7 +14,7 @@
             <label class="f"><span>Título</span><input type="text" bind:value={data.title} readonly={ro} /></label>
         </div>
         <div class="grid g3">
-            <label class="f"><span>Raça</span><input type="text" bind:value={data.race} readonly={ro} /></label>
+            <label class="f"><span>Espécie</span><input type="text" bind:value={data.race} readonly={ro} /></label>
             <label class="f"><span>Classe</span><input type="text" bind:value={data.cls} readonly={ro} /></label>
             <label class="f"><span>Alinhamento</span><input type="text" bind:value={data.alignment} readonly={ro} /></label>
         </div>
