@@ -27,28 +27,3 @@ enviada ao narrador pelos metadados do jogador) seguem o que o DummySheet faz.
   Os números de movimento ficam em `src/lib/rules.ts` e podem ser editados.
 - **Ajuste de reação** mostra o modificador de CAR digitado nos atributos.
 
-## Publicar no GitHub e instalar no Owlbear
-
-1. Crie um repositório **público** com o nome que quiser e envie todos os arquivos desta pasta, inclusive a pasta oculta `.github`.
-   Se a pasta `.github` não subir, crie o arquivo à mão em **Add file → Create new file**, com o nome `.github/workflows/deploy.yml`,
-   e copie o conteúdo do arquivo de mesmo nome deste projeto.
-2. Em **Settings → Pages**, escolha **GitHub Actions** em **Source**.
-3. Na aba **Actions**, rode **Deploy to GitHub Pages** (Run workflow) e espere terminar.
-4. O endereço da extensão será `https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/manifest.json`.
-5. No Owlbear Rodeo, use **Add custom extension**, cole esse endereço e ative a extensão na sala.
-
-Durante o build, o fluxo ajusta os caminhos do `manifest.json` e do Vite ao nome do repositório.
-
-## Rodar no computador
-
-```
-npm install
-npm run dev
-```
-
-## Observações
-
-- Em Settings, o backup exporta e importa a ficha em arquivo JSON.
-- O narrador só vê jogadores conectados que já abriram a extensão. A ficha do narrador fica só no navegador dele.
-- Os rótulos e a disposição das seções seguem a ficha OSE oficial do Roll20 (Necrotic Gnome). Ela não traz arquivo de licença,
-  então vale pedir autorização ao autor antes de divulgar este projeto.
