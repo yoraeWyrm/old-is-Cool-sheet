@@ -20,9 +20,10 @@
 
     // Jogadores que já publicaram uma ficha (só o narrador usa esta lista).
     $: others = $players.filter((p) => p.metadata && p.metadata[NS])
+    $: viewingIsValid = viewing === 'me' || others.some((p) => p.id === viewing)
+    $: if (!viewingIsValid) viewing = 'me'
     $: other = viewing === 'me' ? null : others.find((p) => p.id === viewing)
     $: viewed = other ? (normalizeSheet(other.metadata[NS]) as OseSheet) : null
-    $: if (viewing !== 'me' && !other) viewing = 'me'
 
     function optionLabel(p: { name: string; metadata: Record<string, unknown> }): string {
         return p.name + ' (' + normalizeSheet(p.metadata[NS]).name + ')'
