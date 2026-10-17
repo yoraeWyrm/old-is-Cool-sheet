@@ -1,0 +1,14 @@
+{
+    "name": "Ficha OSE",
+    "version": "1.0.0",
+    "manifest_version": 1,
+    "icon": "/icon.svg",
+    "description": "Ficha de personagem para jogos OSR, com peso do equipamento, imagem do personagem e visão do narrador.",
+    "action": {
+      "title": "Ficha OSE",
+      "icon": "/icon.svg",
+      "popover": "/",
+      "height": 1200,
+      "width": 700
+    }
+}
