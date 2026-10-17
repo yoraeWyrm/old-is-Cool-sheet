@@ -3,7 +3,7 @@
     "version": "1.1.1",
     "manifest_version": 1,
     "icon": "/icon.svg",
-    "description": "Ficha de personagem para jogos OSR, com peso do equipamento, imagem do personagem e visão do narrador. Possui addons para Dolmenwood (glamour e runas).",
+    "description": "Ficha para jogos OSR, com peso do equipamento, img do personagem e visão do narrador. Possui addons para Dolmenwood (glamour e runas).",
     "action": {
         "title": "Old is Cool - Sheet",
         "icon": "/icon.svg",
