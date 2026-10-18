@@ -1,4 +1,4 @@
-# Ficha OSE
+# Old is Cool - Sheet
 
 Ficha de personagem para jogos OSR, com peso do equipamento, imagem do personagem e visão do narrador.
 Possui addons para Dolmenwood (glamour e runas, na aba Magias).
@@ -6,7 +6,7 @@ Feita em Svelte, TypeScript e Vite, no Owlbear Rodeo, com o layout inspirado na 
 A configuração de build e a forma de salvar (navegador do jogador, ficha enviada ao narrador pelos metadados do jogador)
 seguem o que o DummySheet faz.
 
-Versão atual: **1.1.2**. O histórico de mudanças está em [CHANGELOG.md](CHANGELOG.md).
+Versão atual: **1.1.4**. O histórico de mudanças está em [CHANGELOG.md](CHANGELOG.md).
 
 ## O que tem
 
