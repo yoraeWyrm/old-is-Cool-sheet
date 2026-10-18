@@ -3,7 +3,7 @@
 import type { OseSheet, Location, Weapon, GearItem } from './model'
 import {
   BASIC_MOVEMENT, COIN_WEIGHT, DETAILED_MOVEMENT, ITEM_BASED_MOVEMENT,
-  AC_BASE, DESCENDING_AC_CONSTANT, ENCOUNTER_DIVISOR, OVERLAND_DIVISOR,
+  AC_BASE, DESCENDING_AC_CONSTANT, ENCOUNTER_DIVISOR,
 } from './rules'
 
 // Número com sinal. Aceita vírgula ou ponto, e "+2". Vazio ou inválido vale 0.
@@ -127,13 +127,13 @@ export function itemCounts(s: OseSheet): { equipped: number; packed: number } {
   return { equipped: counts.equipped, packed: counts.packed }
 }
 
-export interface Movement { explore: number; encounter: number; overland: number }
+// Em metros: movimento base (exploração) e movimento de encontro.
+export interface Movement { explore: number; encounter: number }
 
 function fromExplore(explore: number): Movement {
   return {
     explore,
-    encounter: Math.round(explore / ENCOUNTER_DIVISOR),
-    overland: Math.round(explore / OVERLAND_DIVISOR),
+    encounter: Math.round((explore / ENCOUNTER_DIVISOR) * 10) / 10,
   }
 }
 

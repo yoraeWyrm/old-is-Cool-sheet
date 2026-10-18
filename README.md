@@ -6,7 +6,7 @@ Feita em Svelte, TypeScript e Vite, no Owlbear Rodeo, com o layout inspirado na 
 A configuração de build e a forma de salvar (navegador do jogador, ficha enviada ao narrador pelos metadados do jogador)
 seguem o que o DummySheet faz.
 
-Versão atual: **1.1.1**. O histórico de mudanças está em [CHANGELOG.md](CHANGELOG.md).
+Versão atual: **1.1.2**. O histórico de mudanças está em [CHANGELOG.md](CHANGELOG.md).
 
 ## O que tem
 
@@ -29,7 +29,7 @@ Versão atual: **1.1.1**. O histórico de mudanças está em [CHANGELOG.md](CHAN
 - **Armas:** o +Ataque soma no acerto e no dano, e o +Dano soma só no dano. A tabela mostra o **Acerto**
   (ataque total mais o +Ataque da arma) e o **Dano total** (dado mais +Ataque mais +Dano, por exemplo 1d8+3).
 - **Peso total** (carga detalhada) = moedas (1 cada) + armas + armaduras + equipamento (quantidade × peso).
-- **Movimento** conforme o tipo de carga: básica, detalhada ou por itens (com ou sem modificador de FOR).
-  Os números de movimento ficam em `src/lib/rules.ts` e podem ser editados.
+- **Movimento base (encontro)**, em metros, conforme o tipo de carga: básica, detalhada ou por itens (com ou sem modificador de FOR).
+  Na carga detalhada: até 400 de peso = 36 m (12 m), até 600 = 27 m (9 m), até 800 = 18 m (6 m), até 1600 = 9 m (3 m).
+  Os números ficam em `src/lib/rules.ts` e podem ser editados.
 - **Ajuste de reação** mostra o modificador de CAR digitado nos atributos.
-

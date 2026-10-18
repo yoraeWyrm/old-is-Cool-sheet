@@ -1,5 +1,15 @@
 # Histórico de versões
 
+## 1.1.2 (2026-10-17)
+
+- **Movimento em metros:** o campo passou a se chamar "Movimento base (encontro)" e mostra, por exemplo, 36 m (12 m).
+  Na carga detalhada: até 400 de peso = 36 m (12 m), até 600 = 27 m (9 m), até 800 = 18 m (6 m), até 1600 = 9 m (3 m).
+  As cargas básica e por itens também passaram para metros.
+- **Ícone:** novo desenho do dolmen, mais parecido com a ilustração de referência (pilares mais largos na base, pedra de cima grossa e irregular),
+  em uma cor só e com as linhas da pedra vazadas, para continuar legível em tamanho pequeno.
+- **Correção:** a volta à ficha própria no `App.svelte` causava um ciclo reativo no Svelte. A condição agora usa a lista de jogadores, sem depender de `other`.
+- README: removida a parte de publicação e instalação.
+
 ## 1.1.1 (2026-10-17)
 
 - Novo ícone da extensão: três dolmens formando um portal (duas pedras em pé e uma deitada por cima), com "OSR" em blocos dentro.

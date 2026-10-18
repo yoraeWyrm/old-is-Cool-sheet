@@ -55,6 +55,6 @@
         <label class="f"><span>Iniciativa</span><input type="text" bind:value={data.initiative} readonly={ro} /></label>
         <div class="f"><span>Ajuste de reação</span><output class="calc hl">{reaction}</output></div>
         <div class="f"><span>Peso total</span><output class="calc hl">{load}</output></div>
-        <div class="f"><span>Movimento (encontro)</span><output class="calc">{mov ? mov.explore + ' (' + mov.encounter + ')' : '—'}</output></div>
+        <div class="f"><span>Movimento base (encontro)</span><output class="calc">{mov ? fmt(mov.explore) + ' m (' + fmt(mov.encounter) + ' m)' : '—'}</output></div>
     </div>
 </section>
