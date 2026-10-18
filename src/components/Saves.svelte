@@ -5,11 +5,11 @@
     export let ro = false
 
     const list = [
-        { k: 'd', name: 'Morte e veneno' },
-        { k: 'w', name: 'Varinhas' },
-        { k: 'p', name: 'Paralisia e petrificação' },
+        { k: 'd', name: 'Ruína' },
+        { k: 'w', name: 'Varinha' },
+        { k: 'p', name: 'Paralisia' },
         { k: 'b', name: 'Sopro' },
-        { k: 's', name: 'Magias, bastões e cajados' },
+        { k: 's', name: 'Feitiço' },
     ]
 </script>
 
