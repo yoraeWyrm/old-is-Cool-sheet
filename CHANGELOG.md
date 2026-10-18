@@ -1,5 +1,14 @@
 # Histórico de versões
 
+## 1.1.4 (2026-10-17)
+
+- **Descrição:** "Ficha custom OSR com CA, acerto e peso calculados, e movimento pela carga. Addons para Dolmenwood (glamour e runas)."
+
+## 1.1.3 (2026-10-17)
+
+- **Novo nome:** a extensão passou a se chamar "Old is Cool - Sheet" (no Owlbear e na aba do navegador).
+- **Nova descrição:** "Ficha OSR com peso do equipamento, imagem do personagem e visão do narrador. Addons para Dolmenwood (glamour e runas)."
+
 ## 1.1.2 (2026-10-17)
 
 - **Movimento em metros:** o campo passou a se chamar "Movimento base (encontro)" e mostra, por exemplo, 36 m (12 m).
